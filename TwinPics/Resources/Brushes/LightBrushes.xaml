@@ -3,5 +3,5 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="Main" Color="#ffffff"/>
-    <Color x:Key="Main2" >#774122</Color>
+   
 </ResourceDictionary>
