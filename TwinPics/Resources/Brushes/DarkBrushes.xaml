@@ -3,5 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <SolidColorBrush x:Key="Main" Color="#181818"/>
-  
+
+    <SolidColorBrush x:Key="Blue.400" Color="#53A2FF"/>
+
+    <SolidColorBrush x:Key="StrokeDash" Color="#3D3F43"/>
+    <SolidColorBrush x:Key="StrokeDash.Active" Color="#5f6269"/>
+    <SolidColorBrush x:Key="StrokeDash.Invalid" Color="#D94445"/>
+    
 </ResourceDictionary>

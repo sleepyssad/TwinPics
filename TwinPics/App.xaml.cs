@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using TwinPics.Resources;
+using System.Runtime.InteropServices;
 
 namespace TwinPics
 {
