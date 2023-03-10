@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
 
-namespace TwinPics.Views.Converters
+namespace TwinPics.Converters
 {
     
     public class SolidColorBrushToColor : IValueConverter

@@ -1,25 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.ViewManagement;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using TwinPics.Resources;
-using System.Runtime.InteropServices;
+using Windows.Foundation;
 
 namespace TwinPics
 {
@@ -52,6 +42,8 @@ namespace TwinPics
                 ThemeManager.UpdateTheme(new ThemeListener().CurrentTheme);
                 new ThemeListener().ThemeChanged += App_ThemeChanged;
 
+              
+
                 Window.Current.Content = rootFrame;
             }
 
@@ -59,11 +51,13 @@ namespace TwinPics
             {
                 if (rootFrame.Content == null)
                 {
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(Views.MainPage), e.Arguments);
                 }
 
                 Window.Current.Activate();
             }
+
+          
         }
 
         void App_ThemeChanged(ThemeListener sender)

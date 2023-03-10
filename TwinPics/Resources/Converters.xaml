@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converter="using:TwinPics.Views.Converters">
+    xmlns:converter="using:TwinPics.Converters">
 
     <converter:SolidColorBrushToColor x:Key="SolidColorBrushToColor"/>
     

@@ -1,0 +1,29 @@
+﻿<Page
+    x:Class="TwinPics.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TwinPics"
+    xmlns:control="using:TwinPics.Views.Controls"
+    xmlns:component="using:TwinPics.Views.Components"
+    xmlns:page="using:TwinPics.Views.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource Main}">
+
+    <Grid Margin="30,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Row="1">
+            <Frame.Content>
+                <page:PrimaryPage/>
+            </Frame.Content>
+        </Frame>
+        <component:Footer Grid.Row="2"/>
+    </Grid>
+  
+</Page>
