@@ -11,7 +11,11 @@ namespace TwinPics.Views
         public MainPage()
         {
             this.InitializeComponent();
-           
+        }
+
+        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            sdsdds.IsRunning = !sdsdds.IsRunning;
         }
     }
 }

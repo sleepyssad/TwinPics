@@ -5,25 +5,36 @@
     xmlns:local="using:TwinPics"
     xmlns:control="using:TwinPics.Views.Controls"
     xmlns:component="using:TwinPics.Views.Components"
+   
     xmlns:page="using:TwinPics.Views.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource Main}">
 
-    <Grid Margin="30,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
-        </Grid.RowDefinitions>
-
-        <Frame Grid.Row="1">
-            <Frame.Content>
-                <page:PrimaryPage/>
-            </Frame.Content>
-        </Frame>
-        <component:Footer Grid.Row="2"/>
+    <Grid>
+        <control:Loader x:Name="sdsdds" Width="50" Height="50" IsRunning="False" />
+        <Button Content="+" Click="Button_Click"/>
+  
     </Grid>
   
 </Page>
+
+<!--<Grid Margin="30,0">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="60"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="60"/>
+    </Grid.RowDefinitions>
+
+    <Grid>
+        <control:Button Width="100" Height="30" IsEnabled="false"/>
+    </Grid>
+
+    <Frame Grid.Row="1">
+        <Frame.Content>
+            <page:PrimaryPage/>
+        </Frame.Content>
+    </Frame>
+    <component:Footer Grid.Row="2"/>
+</Grid>-->
