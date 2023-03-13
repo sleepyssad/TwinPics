@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Uwp.Helpers;
 using System;
+using TwinPics.Controllers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -92,12 +93,24 @@ namespace TwinPics.Views.Controls
 
         public Button()
         {
-           
-
             InitializeComponent();
 
             DataContext = this;
+            AppController.OnThemeChanged += OnThemeChanged;
+        }
 
+        private void OnThemeChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                DataContext = null;
+                DataContext = this;
+                DefaultState.Begin();
+            }
+            catch
+            {
+
+            }
         }
 
         private void FormLoaded(object sender, RoutedEventArgs e)

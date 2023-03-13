@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Navigation;
 using Microsoft.Toolkit.Uwp.UI.Helpers;
 using TwinPics.Resources;
 using Windows.Foundation;
+using TwinPics.Controllers;
 
 namespace TwinPics
 {
@@ -63,6 +64,7 @@ namespace TwinPics
         void App_ThemeChanged(ThemeListener sender)
         {
             ThemeManager.UpdateTheme(sender.CurrentTheme);
+            AppController.CallThemeChanged(sender, null);
         }
        
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)

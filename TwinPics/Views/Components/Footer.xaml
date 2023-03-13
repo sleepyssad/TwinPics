@@ -18,15 +18,6 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,2,0,0"/>
         </Style>
-        
-        <Style TargetType="control:Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="CornerRadius" Value="5"/>
-            
-            <Setter Property="HoveredBackground" Value="Transparent"/>
-        </Style>
     </Page.Resources>
     
     <Grid>
@@ -39,26 +30,26 @@
         <StackPanel Orientation="Horizontal" 
                     Spacing="1"
                     VerticalAlignment="Center">
-            <control:Button Text="About" TextColor="{ThemeResource FooterButtonTextColor}" HoveredTextColor="{ThemeResource FooterButtonTextColor.Hovered}" />
+            <control:Button Text="About" Style="{StaticResource FooterButton}"/>
             <Ellipse/>
-            <control:Button Text="FAQ" TextColor="{ThemeResource FooterButtonTextColor}" HoveredTextColor="{ThemeResource FooterButtonTextColor.Hovered}" />
+            <control:Button Text="FAQ" Style="{StaticResource FooterButton}"/>
             <Ellipse/>
-            <control:Button Text="Settings" TextColor="{ThemeResource FooterButtonTextColor}" HoveredTextColor="{ThemeResource FooterButtonTextColor.Hovered}" />
+            <control:Button Text="Settings" Style="{StaticResource FooterButton}"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" 
                     Spacing="1"
                     VerticalAlignment="Center"
                     Grid.Column="2">
-            <control:Button Text="Email" TextColor="{ThemeResource FooterButtonTextColor}" HoveredTextColor="{ThemeResource FooterButtonTextColor.Hovered}" />
+            <control:Button Text="Email" Style="{StaticResource FooterButton}"/>
             <Ellipse/>
-            <control:Button Text="Donate" TextColor="{ThemeResource FooterButtonTextColor}" HoveredTextColor="{ThemeResource FooterButtonTextColor.Hovered}" />
+            <control:Button Text="Donate" Style="{StaticResource FooterButton}"/>
             <Ellipse/>
-            <control:Button Text="Dribbble" TextColor="{ThemeResource FooterButtonTextColor}" HoveredTextColor="{ThemeResource FooterButtonTextColor.Hovered}" />
+            <control:Button Text="Dribbble" Style="{StaticResource FooterButton}"/>
             <Ellipse/>
-            <control:Button Text="LinkedIn" TextColor="{ThemeResource FooterButtonTextColor}" HoveredTextColor="{ThemeResource FooterButtonTextColor.Hovered}" />
+            <control:Button Text="LinkedIn" Style="{StaticResource FooterButton}"/>
             <Ellipse/>
-            <control:Button Text="GitHub" TextColor="{ThemeResource FooterButtonTextColor}" HoveredTextColor="{ThemeResource FooterButtonTextColor.Hovered}" />
+            <control:Button Text="GitHub" Style="{StaticResource FooterButton}"/>
         </StackPanel>
     </Grid>
 </Page>
