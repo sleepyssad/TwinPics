@@ -9,26 +9,109 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     mc:Ignorable="d"
-    x:Name="Self">
+    x:Name="Self"
+    DataContext="{Binding ElementName=Self}">
 
-    <Grid x:Name="Form" 
+
+    <Grid x:Name="Form"
+          Loaded="FormLoaded"
+          Padding="{Binding ElementName=Self, Path=Padding}"
           CornerRadius="{Binding ElementName=Self, Path=CornerRadius}"
           Background="{Binding ElementName=Self, Path=Background}"
           BorderBrush="{Binding ElementName=Self, Path=BorderBrush}"
           BorderThickness="{Binding ElementName=Self, Path=BorderThickness}">
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="{Binding ElementName=Self, Path=Text}" 
-                       Foreground="{Binding ElementName=Self, Path=TextColor}"
-                       FontSize="{Binding ElementName=Self, Path=FontSize}"/>
-        </StackPanel>
+        <Canvas>
+            <Ellipse x:Name="EllipseElement"
+                 Opacity="0"
+                 Fill="{ThemeResource RippleEffectColor}"
+                 Loaded="OnEllipseLoaded"
+                 VerticalAlignment="Top" 
+                 HorizontalAlignment="Left"
+                 IsHitTestVisible="False"
+                 RenderTransformOrigin=".5,.5">
+                <Ellipse.RenderTransform>
+                    <ScaleTransform x:Name="EllipseElementScale"
+                                ScaleX="1"
+                                ScaleY="1"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+        </Canvas>
        
 
-        <Rectangle Tapped="OnTapped"
+        <StackPanel Orientation="Horizontal" 
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Center">
+            <TextBlock x:Name="TextElement"
+                       VerticalAlignment="Center"
+                       Visibility="Collapsed"
+                       Margin="4,0,4,0"
+                       Text="{Binding ElementName=Self, Path=Text}" 
+                       Foreground="{Binding ElementName=Self, Path=TextColor}"
+                       FontSize="{Binding ElementName=Self, Path=FontSize}"/>
+            <Grid>
+                <BitmapIcon x:Name="ActiveIconElement"
+                            Margin="4,0,4,0"
+                            Visibility="Collapsed"
+                            VerticalAlignment="Center"
+                            UriSource="{Binding ElementName=Self, Path=Icon}"
+                            Width="{Binding ElementName=Self, Path=IconSize}"
+                            Height="{Binding ElementName=Self, Path=IconSize}"
+                            Foreground="{Binding ElementName=Self, Path=HoveredIconColor}"/>
+                <BitmapIcon x:Name="IconElement"
+                            Margin="4,0,4,0"
+                            Visibility="Collapsed"
+                            VerticalAlignment="Center"
+                            UriSource="{Binding ElementName=Self, Path=Icon}"
+                            Width="{Binding ElementName=Self, Path=IconSize}"
+                            Height="{Binding ElementName=Self, Path=IconSize}"
+                            Foreground="{Binding ElementName=Self, Path=IconColor}"/>
+            </Grid>
+        </StackPanel>
+
+        <Rectangle x:Name="RectangleTarget"
+                   Tapped="Tapped"
+                   PointerEntered="PointerEntered"
+                   PointerExited="PointerExited"
                    Fill="Transparent"
-                   ui:FrameworkElementExtensions.Cursor="Hand"/>
+                   ui:FrameworkElementExtensions.Cursor="Hand">
+        </Rectangle>
 
         <interactivity:Interaction.Behaviors>
+            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=Text}"
+                                      ComparisonCondition="Equal"
+                                      Value="{x:Null}">
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=TextElement}" 
+                                           PropertyName="Visibility"
+                                           Value="Collapsed" />
+            </core:DataTriggerBehavior>
+            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=Text}"
+                                      ComparisonCondition="NotEqual"
+                                      Value="{x:Null}">
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=TextElement}" 
+                                           PropertyName="Visibility"
+                                           Value="Visible" />
+            </core:DataTriggerBehavior>
+            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=Icon}"
+                                      ComparisonCondition="Equal"
+                                      Value="{x:Null}">
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=IconElement}"
+                                           PropertyName="Visibility"
+                                           Value="Collapsed" />
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=ActiveIconElement}" 
+                                           PropertyName="Visibility"
+                                           Value="Collapsed" />
+            </core:DataTriggerBehavior>
+            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=Icon}"
+                                      ComparisonCondition="NotEqual"
+                                      Value="{x:Null}">
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=IconElement}" 
+                                           PropertyName="Visibility"
+                                           Value="Visible" />
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=ActiveIconElement}" 
+                                           PropertyName="Visibility"
+                                           Value="Visible" />
+            </core:DataTriggerBehavior>
             <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=IsEnabled}"
                                       Value="False">
                 <core:GoToStateAction StateName="DidabledState"/>
@@ -68,4 +151,83 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>
+
+
+    <UserControl.Resources>
+        <Storyboard x:Name="TappedState">
+            <DoubleAnimation Storyboard.TargetName="EllipseElementScale"
+                             EnableDependentAnimation="True"
+                             Storyboard.TargetProperty="ScaleX"
+                             Duration="0:0:0.6"
+                             From="0"
+                             To="15">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase EasingMode="EaseOut" Power="3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="EllipseElementScale"
+                             EnableDependentAnimation="True"
+                             Storyboard.TargetProperty="ScaleY"
+                             Duration="0:0:0.6"
+                             From="0"
+                             To="15">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase EasingMode="EaseOut" Power="3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="EllipseElement"
+                             EnableDependentAnimation="True"
+                             Storyboard.TargetProperty="Opacity"
+                             Duration="0:0:0.5"
+                             From="1"
+                             To="0">
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="DefaultState">
+            <ColorAnimation Storyboard.TargetName="Form"
+                            Storyboard.TargetProperty="(Grid.Background).Color"
+                            EnableDependentAnimation="True"
+                            Duration="0:0:0.080"
+                            To="{Binding Background, Converter={StaticResource SolidColorBrushToColor}}"/>
+            <ColorAnimation Storyboard.TargetName="TextElement"
+                            Storyboard.TargetProperty="(TextBlock.Foreground).Color"
+                            EnableDependentAnimation="True"
+                            Duration="0:0:0.080"
+                            To="{Binding TextColor, Converter={StaticResource SolidColorBrushToColor}}"/>
+            <ColorAnimation Storyboard.TargetName="Form"
+                            Storyboard.TargetProperty="(Grid.BorderBrush).(SolidColorBrush.Color)"
+                            EnableDependentAnimation="True"
+                            Duration="0:0:0.080"
+                            To="{Binding BorderBrush, Converter={StaticResource SolidColorBrushToColor}}"/>
+            <DoubleAnimation Storyboard.TargetName="IconElement"
+                             Storyboard.TargetProperty="Opacity"
+                             EnableDependentAnimation="True"
+                             Duration="0:0:0.080"
+                             To="1"/>
+        </Storyboard>
+
+        <Storyboard x:Name="HoverState">
+            <ColorAnimation Storyboard.TargetName="Form"
+                            Storyboard.TargetProperty="(Grid.Background).Color"
+                            EnableDependentAnimation="True"
+                            Duration="0:0:0.080"
+                            To="{Binding HoveredBackground, Converter={StaticResource SolidColorBrushToColor}}"/>
+            <ColorAnimation Storyboard.TargetName="TextElement"
+                            Storyboard.TargetProperty="(TextBlock.Foreground).Color"
+                            EnableDependentAnimation="True"
+                            Duration="0:0:0.080"
+                            To="{Binding HoveredTextColor, Converter={StaticResource SolidColorBrushToColor}}"/>
+            <ColorAnimation Storyboard.TargetName="Form"
+                            Storyboard.TargetProperty="(Grid.BorderBrush).(SolidColorBrush.Color)"
+                            EnableDependentAnimation="True"
+                            Duration="0:0:0.080"
+                            To="{Binding HoveredBorderBrush, Converter={StaticResource SolidColorBrushToColor}}"/>
+            <DoubleAnimation Storyboard.TargetName="IconElement"
+                             Storyboard.TargetProperty="Opacity"
+                             EnableDependentAnimation="True"
+                             Duration="0:0:0.080"
+                             To="0"/>
+        </Storyboard>
+    </UserControl.Resources>
+    
 </UserControl>

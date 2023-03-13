@@ -26,5 +26,10 @@ namespace TwinPics.Views.Pages
         {
             this.InitializeComponent();
         }
+
+        private void DragAndDrop_OnStorageFolder(object sender, Controls.DragAndDropEventArgs e)
+        {
+
+        }
     }
 }

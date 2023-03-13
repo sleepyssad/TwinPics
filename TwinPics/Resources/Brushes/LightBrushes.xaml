@@ -9,5 +9,9 @@
     <SolidColorBrush x:Key="StrokeDash" Color="#D4D8E2"/>
     <SolidColorBrush x:Key="StrokeDash.Active" Color="#8c8e95"/>
     <SolidColorBrush x:Key="StrokeDash.Invalid" Color="#FB6A6B"/>
-    
+
+    <SolidColorBrush x:Key="FooterButtonTextColor" Color="#D0000000"/>
+    <SolidColorBrush x:Key="FooterButtonTextColor.Hovered" Color="Black"/>
+
+    <SolidColorBrush x:Key="RippleEffectColor" Color="#50000000"/>
 </ResourceDictionary>

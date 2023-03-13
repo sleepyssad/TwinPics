@@ -13,9 +13,21 @@
     Background="{ThemeResource Main}">
 
     <Grid>
-        <control:Loader x:Name="sdsdds" Width="50" Height="50" IsRunning="False" />
-        <Button Content="+" Click="Button_Click"/>
-  
+        <Grid Margin="30,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+
+           
+            <Frame Grid.Row="1">
+                <Frame.Content>
+                    <page:PrimaryPage/>
+                </Frame.Content>
+            </Frame>
+            <component:Footer Grid.Row="2"/>
+        </Grid>
     </Grid>
   
 </Page>

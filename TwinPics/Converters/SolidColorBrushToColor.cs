@@ -16,11 +16,25 @@ namespace TwinPics.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return (value as SolidColorBrush).Color;
+            try 
+            {
+                return value != null ? (value as SolidColorBrush).Color : Colors.Transparent;
+            }
+            catch
+            {
+                return Colors.Transparent;
+            } 
         }
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return new SolidColorBrush(value != null ? (Color)value : Colors.Transparent);
+            try
+            {
+                return new SolidColorBrush(value != null ? (Color)value : Colors.Transparent);
+            }
+            catch
+            {
+                return new SolidColorBrush(Colors.Transparent);
+            }
         }
     }
 }

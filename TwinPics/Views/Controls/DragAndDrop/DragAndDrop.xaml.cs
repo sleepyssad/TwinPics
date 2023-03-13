@@ -11,7 +11,7 @@ namespace TwinPics.Views.Controls
 {
     public sealed partial class DragAndDrop : UserControl
     {
-
+        // TODO: DragAndDrop -> Add command & command parameter
         public DragAndDrop()
         {
             this.InitializeComponent();

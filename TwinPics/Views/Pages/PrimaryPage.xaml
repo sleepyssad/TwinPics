@@ -9,6 +9,6 @@
     mc:Ignorable="d">
 
     <Grid>
-        <control:DragAndDrop/>
+        <control:DragAndDrop OnStorageFolder="DragAndDrop_OnStorageFolder"/>
     </Grid>
 </Page>
