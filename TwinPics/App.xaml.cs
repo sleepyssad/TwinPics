@@ -57,8 +57,8 @@ namespace TwinPics
 
                 Window.Current.Activate();
             }
+           
 
-          
         }
 
         void App_ThemeChanged(ThemeListener sender)

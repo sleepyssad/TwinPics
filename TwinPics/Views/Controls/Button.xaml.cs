@@ -10,12 +10,6 @@ namespace TwinPics.Views.Controls
 {
     public sealed partial class Button : UserControl
     {
-        // TODO: Button -> Add loading to button
-        // TODO: Button -> Add tooltip
-        // TODO: Button -> Add command & command parameter
-        // TODO: Button -> Add color for CanRipple
-        // TODO: Button -> Change events from Tap to Click. Or add optional variant
-
         public event EventHandler<DragAndDropEventArgs> OnTapped;
 
         public event EventHandler<DragAndDropEventArgs> OnPointerEntered;
