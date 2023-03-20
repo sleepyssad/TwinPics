@@ -9,17 +9,23 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
     mc:Ignorable="d"
-    x:Name="Self"
-    DataContext="{Binding ElementName=Self}">
+    x:Name="Self">
 
 
     <Grid x:Name="Form"
           Loaded="FormLoaded"
-          Padding="{Binding ElementName=Self, Path=Padding}"
+          SizeChanged="FormSizeChanged"
+          Tapped="Tapped"
+          PointerEntered="PointerEntered"
+          PointerExited="PointerExited"
+          ui:FrameworkElementExtensions.Cursor="Hand"
           CornerRadius="{Binding ElementName=Self, Path=CornerRadius}"
           Background="{Binding ElementName=Self, Path=Background}"
           BorderBrush="{Binding ElementName=Self, Path=BorderBrush}"
           BorderThickness="{Binding ElementName=Self, Path=BorderThickness}">
+        <Grid.Clip>
+            <RectangleGeometry Rect="0,0,0,0"/>
+        </Grid.Clip>
 
         <Canvas>
             <Ellipse x:Name="EllipseElement"
@@ -37,11 +43,12 @@
                 </Ellipse.RenderTransform>
             </Ellipse>
         </Canvas>
-       
+
 
         <StackPanel Orientation="Horizontal" 
                     VerticalAlignment="Center" 
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Margin="{Binding ElementName=Self, Path=Padding}">
             <TextBlock x:Name="TextElement"
                        VerticalAlignment="Center"
                        Visibility="Collapsed"
@@ -69,15 +76,23 @@
             </Grid>
         </StackPanel>
 
-        <Rectangle x:Name="RectangleTarget"
-                   Tapped="Tapped"
-                   PointerEntered="PointerEntered"
-                   PointerExited="PointerExited"
-                   Fill="Transparent"
-                   ui:FrameworkElementExtensions.Cursor="Hand">
-        </Rectangle>
-
         <interactivity:Interaction.Behaviors>
+            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=RippleColor}"
+                                      ComparisonCondition="Equal"
+                                      Value="{x:Null}">
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=EllipseElement}" 
+                                           PropertyName="Fill"
+                                           Value="{ThemeResource RippleEffectColor}" />
+            </core:DataTriggerBehavior>
+            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=RippleColor}"
+                                      ComparisonCondition="NotEqual"
+                                      Value="{x:Null}">
+                <core:ChangePropertyAction TargetObject="{Binding ElementName=EllipseElement}" 
+                                           PropertyName="Fill"
+                                           Value="{Binding ElementName=Self, Path=RippleColor}" />
+            </core:DataTriggerBehavior>
+
+
             <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=Text}"
                                       ComparisonCondition="Equal"
                                       Value="{x:Null}">

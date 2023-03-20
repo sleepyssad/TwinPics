@@ -1,0 +1,39 @@
+﻿<UserControl
+    x:Class="TwinPics.Views.Controls.TestControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TwinPics.Views.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Tapped="Grid_Tapped" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited"  Background="Transparent">
+        <TextBlock x:Name="TextElement" Foreground="{x:Bind TextColor}" Text="{x:Bind Text, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Grid>
+    <UserControl.Resources>
+        <Storyboard x:Name="DefaultState">
+
+
+            <ColorAnimation x:Name="DefaultStateTextElement" 
+                            Storyboard.TargetName="TextElement"
+                            Storyboard.TargetProperty="(TextBlock.Foreground).Color"
+                            EnableDependentAnimation="True"
+                            Duration="0:0:0.080"
+                            To="{x:Bind TextColor, Converter={StaticResource SolidColorBrushToColor}}"/>
+            
+        </Storyboard>
+
+        <Storyboard x:Name="HoverState">
+
+            <ColorAnimation x:Name="HoverStateTextElement" 
+                            Storyboard.TargetName="TextElement"
+                            Storyboard.TargetProperty="(TextBlock.Foreground).Color"
+                            EnableDependentAnimation="True"
+                            Duration="0:0:0.080"
+                            To="{x:Bind HoveredTextColor, Converter={StaticResource SolidColorBrushToColor}}"/>
+        
+        </Storyboard>
+    </UserControl.Resources>
+</UserControl>

@@ -5,29 +5,40 @@
     xmlns:local="using:TwinPics"
     xmlns:control="using:TwinPics.Views.Controls"
     xmlns:component="using:TwinPics.Views.Components"
-   
     xmlns:page="using:TwinPics.Views.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:TwinPics.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource Main}">
 
+    <Page.DataContext>
+        <vm:TestViewModel/>
+    </Page.DataContext>
+    
     <Grid>
-        <Grid Margin="30,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="60"/>
-            </Grid.RowDefinitions>
 
-
-            <Frame Grid.Row="1">
-                <Frame.Content>
-                    <page:PrimaryPage/>
-                </Frame.Content>
-            </Frame>
-            <component:Footer Grid.Row="2"/>
-        </Grid>
+        <control:TestControl  Background="{ThemeResource Main}" Text="{Binding Name, Mode=TwoWay}" Command="{Binding TestCommand}" TextColor="{ThemeResource FooterButtonTextColor}" HoveredTextColor="{ThemeResource FooterButtonTextColor.Hovered}"/>
+       
     </Grid>
 
 </Page>
+
+<!--<Grid Margin="30,0">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="60"/>
+        <RowDefinition Height="*"/>
+        <RowDefinition Height="60"/>
+    </Grid.RowDefinitions>
+
+
+    <Frame Grid.Row="1">
+        <Frame.Content>
+
+            <control:Button Width="100" Height="100" Text="ffsdsdfsdf" HoveredBackground="red"  Command="{Binding TestCommand}" />
+            --><!--<page:PrimaryPage/>--><!--
+        </Frame.Content>
+    </Frame>
+
+    <component:Footer Grid.Row="2"/>
+</Grid>-->

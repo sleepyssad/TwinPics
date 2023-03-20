@@ -1,8 +1,12 @@
 ﻿using Microsoft.Toolkit.Uwp.Helpers;
 using System;
+using System.Windows.Input;
+using System.Xml.Linq;
 using TwinPics.Controllers;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 
@@ -86,12 +90,33 @@ namespace TwinPics.Views.Controls
             set { SetValue(HoveredBorderBrushProperty, value); }
         }
 
+        public static readonly DependencyProperty RippleColorProperty = DependencyProperty.Register("RippleColor", typeof(SolidColorBrush), typeof(Button), new PropertyMetadata(null));
+        public SolidColorBrush RippleColor
+        {
+            get { return (SolidColorBrush)GetValue(RippleColorProperty); }
+            set { SetValue(RippleColorProperty, value); }
+        }
+
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(ICommand), typeof(Button), new PropertyMetadata(null));
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
+
+        public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register("CommandParameter", typeof(object), typeof(Button), new PropertyMetadata(null));
+        public object CommandParameter
+        {
+            get { return (object)GetValue(CommandParameterProperty); }
+            set { SetValue(CommandParameterProperty, value); }
+        }
 
         public Button()
         {
             InitializeComponent();
 
-            DataContext = this;
+          
+            DataContext = null;
             AppController.OnThemeChanged += OnThemeChanged;
         }
 
@@ -111,10 +136,16 @@ namespace TwinPics.Views.Controls
 
         private void FormLoaded(object sender, RoutedEventArgs e)
         {
+
             if (BorderBrush == null)
                 BorderBrush = new SolidColorBrush(Windows.UI.Colors.Transparent);
             if (Background == null)
                 Background = new SolidColorBrush(ColorHelper.ToColor("#006be9"));
+
+            if (sender is Grid grid)
+            {
+                grid.Clip.Rect = new Rect(0, 0, grid.ActualWidth, grid.ActualHeight);
+            }
         }
 
         private void Tapped(object sender, TappedRoutedEventArgs e)
@@ -130,6 +161,13 @@ namespace TwinPics.Views.Controls
             {
                 OnTapped(this, null);
             }
+
+            if (Command != null && Command.CanExecute(CommandParameter))
+            {
+                Command.Execute(CommandParameter);
+            }
+           
+
         }
 
         private void PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -169,6 +207,14 @@ namespace TwinPics.Views.Controls
         private void OnEllipseLoaded(object sender, RoutedEventArgs e)
         {
             EllipseElement.Width = EllipseElement.Height = this.ActualWidth / 5;
+        }
+
+        private void FormSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (sender is Grid grid)
+            {
+                grid.Clip.Rect = new Rect(0, 0, grid.ActualWidth, grid.ActualHeight);
+            }
         }
     }
 }

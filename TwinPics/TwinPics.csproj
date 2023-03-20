@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Converters\SolidColorBrushToColor.cs" />
+    <Compile Include="ViewModels\TestViewModel.cs" />
     <Compile Include="Views\Components\Footer.xaml.cs">
       <DependentUpon>Footer.xaml</DependentUpon>
     </Compile>
@@ -129,6 +130,9 @@
     </Compile>
     <Compile Include="Views\Controls\Loader.xaml.cs">
       <DependentUpon>Loader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\TestControl.xaml.cs">
+      <DependentUpon>TestControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -175,6 +179,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Controls\Loader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\TestControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
