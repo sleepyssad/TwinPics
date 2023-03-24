@@ -15,30 +15,20 @@
     <Page.DataContext>
         <vm:TestViewModel/>
     </Page.DataContext>
-    
+
     <Grid>
-
-        <control:TestControl  Background="{ThemeResource Main}" Text="{Binding Name, Mode=TwoWay}" Command="{Binding TestCommand}" TextColor="{ThemeResource FooterButtonTextColor}" HoveredTextColor="{ThemeResource FooterButtonTextColor.Hovered}"/>
-       
+        <Grid Margin="30,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="1">
+                <Frame.Content>
+                    <page:PrimaryPage/>
+                </Frame.Content>
+            </Frame>
+            <component:Footer Grid.Row="2"/>
+        </Grid>
     </Grid>
-
 </Page>
-
-<!--<Grid Margin="30,0">
-    <Grid.RowDefinitions>
-        <RowDefinition Height="60"/>
-        <RowDefinition Height="*"/>
-        <RowDefinition Height="60"/>
-    </Grid.RowDefinitions>
-
-
-    <Frame Grid.Row="1">
-        <Frame.Content>
-
-            <control:Button Width="100" Height="100" Text="ffsdsdfsdf" HoveredBackground="red"  Command="{Binding TestCommand}" />
-            --><!--<page:PrimaryPage/>--><!--
-        </Frame.Content>
-    </Frame>
-
-    <component:Footer Grid.Row="2"/>
-</Grid>-->

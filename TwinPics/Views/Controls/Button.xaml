@@ -8,8 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
-    mc:Ignorable="d"
-    x:Name="Self">
+    mc:Ignorable="d">
 
 
     <Grid x:Name="Form"
@@ -19,10 +18,10 @@
           PointerEntered="PointerEntered"
           PointerExited="PointerExited"
           ui:FrameworkElementExtensions.Cursor="Hand"
-          CornerRadius="{Binding ElementName=Self, Path=CornerRadius}"
-          Background="{Binding ElementName=Self, Path=Background}"
-          BorderBrush="{Binding ElementName=Self, Path=BorderBrush}"
-          BorderThickness="{Binding ElementName=Self, Path=BorderThickness}">
+          CornerRadius="{x:Bind CornerRadius, Mode=OneWay}"
+          Background="{x:Bind Background, Mode=OneWay}"
+          BorderBrush="{x:Bind BorderBrush, Mode=OneWay}"
+          BorderThickness="{x:Bind BorderThickness, Mode=OneWay}">
         <Grid.Clip>
             <RectangleGeometry Rect="0,0,0,0"/>
         </Grid.Clip>
@@ -48,66 +47,50 @@
         <StackPanel Orientation="Horizontal" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center"
-                    Margin="{Binding ElementName=Self, Path=Padding}">
+                    Margin="{x:Bind Padding, Mode=OneWay}">
             <TextBlock x:Name="TextElement"
                        VerticalAlignment="Center"
                        Visibility="Collapsed"
                        Margin="4,0,4,0"
-                       Text="{Binding ElementName=Self, Path=Text}" 
-                       Foreground="{Binding ElementName=Self, Path=TextColor}"
-                       FontSize="{Binding ElementName=Self, Path=FontSize}"/>
+                       Text="{x:Bind Text, Mode=OneWay}" 
+                       Foreground="{x:Bind TextColor, Mode=OneWay}"
+                       FontSize="{x:Bind FontSize, Mode=OneWay}"/>
             <Grid>
                 <BitmapIcon x:Name="ActiveIconElement"
                             Margin="4,0,4,0"
                             Visibility="Collapsed"
                             VerticalAlignment="Center"
-                            UriSource="{Binding ElementName=Self, Path=Icon}"
-                            Width="{Binding ElementName=Self, Path=IconSize}"
-                            Height="{Binding ElementName=Self, Path=IconSize}"
-                            Foreground="{Binding ElementName=Self, Path=HoveredIconColor}"/>
+                            UriSource="{x:Bind Icon, Mode=OneWay}"
+                            Width="{x:Bind IconSize, Mode=OneWay}"
+                            Height="{x:Bind IconSize, Mode=OneWay}"
+                            Foreground="{x:Bind HoveredIconColor, Mode=OneWay}"/>
                 <BitmapIcon x:Name="IconElement"
                             Margin="4,0,4,0"
                             Visibility="Collapsed"
                             VerticalAlignment="Center"
-                            UriSource="{Binding ElementName=Self, Path=Icon}"
-                            Width="{Binding ElementName=Self, Path=IconSize}"
-                            Height="{Binding ElementName=Self, Path=IconSize}"
-                            Foreground="{Binding ElementName=Self, Path=IconColor}"/>
+                            UriSource="{x:Bind Icon, Mode=OneWay}"
+                            Width="{x:Bind IconSize, Mode=OneWay}"
+                            Height="{x:Bind IconSize, Mode=OneWay}"
+                            Foreground="{x:Bind IconColor, Mode=OneWay}"/>
             </Grid>
         </StackPanel>
 
         <interactivity:Interaction.Behaviors>
-            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=RippleColor}"
-                                      ComparisonCondition="Equal"
-                                      Value="{x:Null}">
-                <core:ChangePropertyAction TargetObject="{Binding ElementName=EllipseElement}" 
-                                           PropertyName="Fill"
-                                           Value="{ThemeResource RippleEffectColor}" />
-            </core:DataTriggerBehavior>
-            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=RippleColor}"
-                                      ComparisonCondition="NotEqual"
-                                      Value="{x:Null}">
-                <core:ChangePropertyAction TargetObject="{Binding ElementName=EllipseElement}" 
-                                           PropertyName="Fill"
-                                           Value="{Binding ElementName=Self, Path=RippleColor}" />
-            </core:DataTriggerBehavior>
-
-
-            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=Text}"
+            <core:DataTriggerBehavior Binding="{x:Bind Text, Mode=OneWay}"
                                       ComparisonCondition="Equal"
                                       Value="{x:Null}">
                 <core:ChangePropertyAction TargetObject="{Binding ElementName=TextElement}" 
                                            PropertyName="Visibility"
                                            Value="Collapsed" />
             </core:DataTriggerBehavior>
-            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=Text}"
+            <core:DataTriggerBehavior Binding="{x:Bind Text, Mode=OneWay}"
                                       ComparisonCondition="NotEqual"
                                       Value="{x:Null}">
                 <core:ChangePropertyAction TargetObject="{Binding ElementName=TextElement}" 
                                            PropertyName="Visibility"
                                            Value="Visible" />
             </core:DataTriggerBehavior>
-            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=Icon}"
+            <core:DataTriggerBehavior Binding="{x:Bind Icon, Mode=OneWay}"
                                       ComparisonCondition="Equal"
                                       Value="{x:Null}">
                 <core:ChangePropertyAction TargetObject="{Binding ElementName=IconElement}"
@@ -117,7 +100,7 @@
                                            PropertyName="Visibility"
                                            Value="Collapsed" />
             </core:DataTriggerBehavior>
-            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=Icon}"
+            <core:DataTriggerBehavior Binding="{x:Bind Icon, Mode=OneWay}"
                                       ComparisonCondition="NotEqual"
                                       Value="{x:Null}">
                 <core:ChangePropertyAction TargetObject="{Binding ElementName=IconElement}" 
@@ -127,14 +110,14 @@
                                            PropertyName="Visibility"
                                            Value="Visible" />
             </core:DataTriggerBehavior>
-            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=IsEnabled}"
+            <core:DataTriggerBehavior Binding="{x:Bind IsEnabled, Mode=OneWay}"
                                       Value="False">
                 <core:GoToStateAction StateName="DidabledState"/>
                 <core:ChangePropertyAction TargetObject="{Binding ElementName=Form}" 
                                            PropertyName="IsHitTestVisible"
                                            Value="false" />
             </core:DataTriggerBehavior>
-            <core:DataTriggerBehavior Binding="{Binding ElementName=Self, Path=IsEnabled}"
+            <core:DataTriggerBehavior Binding="{x:Bind IsEnabled, Mode=OneWay}"
                                       Value="True">
                 <core:GoToStateAction StateName="EnabledState"/>
                 <core:ChangePropertyAction TargetObject="{Binding ElementName=Form}"
@@ -199,21 +182,24 @@
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="DefaultState">
-            <ColorAnimation Storyboard.TargetName="Form"
+            <ColorAnimation x:Name="DefaultStateBackground"
+                            Storyboard.TargetName="Form"
                             Storyboard.TargetProperty="(Grid.Background).Color"
                             EnableDependentAnimation="True"
                             Duration="0:0:0.080"
-                            To="{Binding Background, Converter={StaticResource SolidColorBrushToColor}}"/>
-            <ColorAnimation Storyboard.TargetName="TextElement"
+                            To="{x:Bind Background, Mode=OneWay, Converter={StaticResource SolidColorBrushToColor}}"/>
+            <ColorAnimation x:Name="DefaultStateTextColor"
+                            Storyboard.TargetName="TextElement"
                             Storyboard.TargetProperty="(TextBlock.Foreground).Color"
                             EnableDependentAnimation="True"
                             Duration="0:0:0.080"
-                            To="{Binding TextColor, Converter={StaticResource SolidColorBrushToColor}}"/>
-            <ColorAnimation Storyboard.TargetName="Form"
+                            To="{x:Bind TextColor, Mode=OneWay, Converter={StaticResource SolidColorBrushToColor}}"/>
+            <ColorAnimation x:Name="DefaultStateBorderBrush"
+                            Storyboard.TargetName="Form"
                             Storyboard.TargetProperty="(Grid.BorderBrush).(SolidColorBrush.Color)"
                             EnableDependentAnimation="True"
                             Duration="0:0:0.080"
-                            To="{Binding BorderBrush, Converter={StaticResource SolidColorBrushToColor}}"/>
+                            To="{x:Bind BorderBrush, Mode=OneWay, Converter={StaticResource SolidColorBrushToColor}}"/>
             <DoubleAnimation Storyboard.TargetName="IconElement"
                              Storyboard.TargetProperty="Opacity"
                              EnableDependentAnimation="True"
@@ -222,21 +208,24 @@
         </Storyboard>
 
         <Storyboard x:Name="HoverState">
-            <ColorAnimation Storyboard.TargetName="Form"
+            <ColorAnimation x:Name="HoverStateBackground"
+                            Storyboard.TargetName="Form"
                             Storyboard.TargetProperty="(Grid.Background).Color"
                             EnableDependentAnimation="True"
                             Duration="0:0:0.080"
-                            To="{Binding HoveredBackground, Converter={StaticResource SolidColorBrushToColor}}"/>
-            <ColorAnimation Storyboard.TargetName="TextElement"
+                            To="{x:Bind HoveredBackground, Mode=OneWay, Converter={StaticResource SolidColorBrushToColor}}"/>
+            <ColorAnimation x:Name="HoverStateTextColor"
+                            Storyboard.TargetName="TextElement"
                             Storyboard.TargetProperty="(TextBlock.Foreground).Color"
                             EnableDependentAnimation="True"
                             Duration="0:0:0.080"
-                            To="{Binding HoveredTextColor, Converter={StaticResource SolidColorBrushToColor}}"/>
-            <ColorAnimation Storyboard.TargetName="Form"
+                            To="{x:Bind HoveredTextColor, Mode=OneWay, Converter={StaticResource SolidColorBrushToColor}}"/>
+            <ColorAnimation x:Name="HoverStateBorderBrush"
+                            Storyboard.TargetName="Form"
                             Storyboard.TargetProperty="(Grid.BorderBrush).(SolidColorBrush.Color)"
                             EnableDependentAnimation="True"
                             Duration="0:0:0.080"
-                            To="{Binding HoveredBorderBrush, Converter={StaticResource SolidColorBrushToColor}}"/>
+                            To="{x:Bind HoveredBorderBrush, Mode=OneWay, Converter={StaticResource SolidColorBrushToColor}}"/>
             <DoubleAnimation Storyboard.TargetName="IconElement"
                              Storyboard.TargetProperty="Opacity"
                              EnableDependentAnimation="True"

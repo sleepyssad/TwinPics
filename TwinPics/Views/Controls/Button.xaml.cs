@@ -115,8 +115,6 @@ namespace TwinPics.Views.Controls
         {
             InitializeComponent();
 
-          
-            DataContext = null;
             AppController.OnThemeChanged += OnThemeChanged;
         }
 
@@ -124,8 +122,14 @@ namespace TwinPics.Views.Controls
         {
             try
             {
-                DataContext = null;
-                DataContext = this;
+                DefaultStateBackground.To = (Background as SolidColorBrush).Color;
+                DefaultStateTextColor.To = TextColor.Color;
+                DefaultStateBorderBrush.To = (BorderBrush as SolidColorBrush).Color;
+
+                HoverStateBackground.To = HoveredBackground.Color;
+                HoverStateTextColor.To = HoveredTextColor.Color;
+                HoverStateBorderBrush.To = HoveredBorderBrush.Color;
+
                 DefaultState.Begin();
             }
             catch
@@ -152,6 +156,11 @@ namespace TwinPics.Views.Controls
         {
             if (CanRippleEffect)
             {
+                if (RippleColor != null)
+                    EllipseElement.Fill = RippleColor;
+                else
+                    EllipseElement.Fill = (Application.Current.Resources["RippleEffectColor"] as SolidColorBrush);
+
                 EllipseElement.Width = EllipseElement.Height = this.ActualWidth / 5;
                 EllipseElement.Margin = new Thickness(e.GetPosition(this).X - (EllipseElement.Width / 2), e.GetPosition(this).Y - (EllipseElement.Height / 2), 0, 0);
                 TappedState.Begin();
