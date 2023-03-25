@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
+using TwinPics.Views.Components;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -11,12 +13,44 @@ namespace TwinPics.Views.Controls
 {
     public sealed partial class DragAndDrop : UserControl
     {
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(ICommand), typeof(DragAndDrop), new PropertyMetadata(null));
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
+
+        public event EventHandler<DragAndDropEventArgs> OnStorageFolder;
+
         public DragAndDrop()
         {
             this.InitializeComponent();
         }
 
-        public event EventHandler<DragAndDropEventArgs> OnStorageFolder;
+        private void InvalidState(DragEventArgs e = null)
+        {
+            if (e != null && e.DragUIOverride != null)
+            {
+                e.DragUIOverride.Caption = "Only folders allowed";
+            }
+            InvalidStrokeDash.Begin();
+        }
+
+        private void ValidState(DragEventArgs e = null)
+        {
+            if (e != null)
+            {
+                e.AcceptedOperation = DataPackageOperation.Copy;
+
+                if (e.DragUIOverride != null)
+                {
+                    e.DragUIOverride.Caption = "Add folder";
+                    e.DragUIOverride.IsContentVisible = true;
+                }
+            }
+
+            ActiveStrokeDash.Begin();
+        }
 
         private async void OnFolderDragOver(object sender, DragEventArgs e)
         {
@@ -24,34 +58,27 @@ namespace TwinPics.Views.Controls
 
             // Checking that we are not dragging the file.
             // We give consent only if we dragging the folder.
-
-            foreach (var storag in await e.DataView.GetStorageItemsAsync())
+            try
             {
-                if (!storag.IsOfType(StorageItemTypes.Folder))
+                foreach (var storag in await e.DataView.GetStorageItemsAsync())
                 {
-                    if (e.DragUIOverride != null)
+                    if (!storag.IsOfType(StorageItemTypes.Folder))
                     {
-                        e.DragUIOverride.Caption = "Only folders allowed";
+                        InvalidState(e);
+                        deferral.Complete();
+                        return;
                     }
 
-                    InvalidStrokeDash.Begin();
-                    deferral.Complete();
-
-                    return;
                 }
-              
             }
-
-            e.AcceptedOperation = DataPackageOperation.Copy;
-
-            if (e.DragUIOverride != null)
+            catch(Exception ex) 
             {
-                e.DragUIOverride.Caption = "Add folder";
-                e.DragUIOverride.IsContentVisible = true;
+                InvalidState(e);
+                deferral.Complete();
+                return;
             }
-
-            ActiveStrokeDash.Begin();
-
+           
+            ValidState(e);
             deferral.Complete();
         }
 
@@ -69,7 +96,14 @@ namespace TwinPics.Views.Controls
                 var items = await e.DataView.GetStorageItemsAsync();
                 if (items.Count > 0)
                 {
-                    OnStorageFolder(this, new DragAndDropEventArgs(items.OfType<StorageFolder>().ToList()));
+                    var DropEventArgs = new DragAndDropEventArgs(items.OfType<StorageFolder>().ToList());
+
+                    OnStorageFolder(this, DropEventArgs);
+
+                    if (Command.CanExecute(DropEventArgs))
+                    {
+                        Command.Execute(DropEventArgs);
+                    }
                 }
             }
 
@@ -82,7 +116,14 @@ namespace TwinPics.Views.Controls
 
             if (folder != null && OnStorageFolder != null)
             {
-                OnStorageFolder(this, new DragAndDropEventArgs(new List<StorageFolder> { folder }));
+                var DropEventArgs = new DragAndDropEventArgs(new List<StorageFolder> { folder });
+
+                OnStorageFolder(this, DropEventArgs);
+
+                if (Command.CanExecute(DropEventArgs))
+                {
+                    Command.Execute(DropEventArgs);
+                }
             }
         }
     }
