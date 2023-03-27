@@ -6,6 +6,8 @@
 
     <SolidColorBrush x:Key="Blue.400" Color="#006BE9"/>
 
+    <SolidColorBrush x:Key="Logo" Color="#2b87f3"/>
+    
     <SolidColorBrush x:Key="StrokeDash" Color="#D4D8E2"/>
     <SolidColorBrush x:Key="StrokeDash.Active" Color="#8c8e95"/>
     <SolidColorBrush x:Key="StrokeDash.Invalid" Color="#FB6A6B"/>

@@ -23,6 +23,9 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ImageTest"  Width="30" Height="30" Loaded="ImageTest_Loaded"/>
+            </StackPanel>
             <Frame Grid.Row="1">
                 <Frame.Content>
                     <page:PrimaryPage/>
