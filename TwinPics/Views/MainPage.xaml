@@ -24,7 +24,7 @@
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal">
-                <Image x:Name="ImageTest"  Width="30" Height="30" Loaded="ImageTest_Loaded"/>
+                <Image x:Name="ImageTest"  Width="30" Height="30" Source="ms-appx:///Assets/Logo200x200.png"/>
             </StackPanel>
             <Frame Grid.Row="1">
                 <Frame.Content>
