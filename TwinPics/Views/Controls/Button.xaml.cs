@@ -3,6 +3,7 @@ using System;
 using System.Windows.Input;
 using System.Xml.Linq;
 using TwinPics.Controllers;
+using Windows.Devices.Input;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -152,19 +153,26 @@ namespace TwinPics.Views.Controls
             }
         }
 
-        private void Tapped(object sender, TappedRoutedEventArgs e)
+        private void Pressed(object sender, PointerRoutedEventArgs e)
         {
-            if (CanRippleEffect)
+            if (sender is Grid targetGrid && CanRippleEffect && e.Pointer.PointerDeviceType == PointerDeviceType.Mouse && e.GetCurrentPoint(targetGrid).Properties.IsLeftButtonPressed)
             {
+                Point position = e.GetCurrentPoint(targetGrid).Position;
+
                 if (RippleColor != null)
                     EllipseElement.Fill = RippleColor;
                 else
                     EllipseElement.Fill = (Application.Current.Resources["RippleEffectColor"] as SolidColorBrush);
 
                 EllipseElement.Width = EllipseElement.Height = this.ActualWidth / 5;
-                EllipseElement.Margin = new Thickness(e.GetPosition(this).X - (EllipseElement.Width / 2), e.GetPosition(this).Y - (EllipseElement.Height / 2), 0, 0);
+                EllipseElement.Margin = new Thickness(position.X - (EllipseElement.Width / 2), position.Y - (EllipseElement.Height / 2), 0, 0);
                 TappedState.Begin();
             }
+        }
+
+        private void Released(object sender, PointerRoutedEventArgs e)
+        {
+            DefaultOpacityTappedState.Begin();
 
             if (OnTapped != null)
             {
@@ -175,9 +183,8 @@ namespace TwinPics.Views.Controls
             {
                 Command.Execute(CommandParameter);
             }
-           
-
         }
+
 
         private void PointerEntered(object sender, PointerRoutedEventArgs e)
         {

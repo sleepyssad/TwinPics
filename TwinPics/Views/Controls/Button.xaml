@@ -14,7 +14,8 @@
     <Grid x:Name="Form"
           Loaded="FormLoaded"
           SizeChanged="FormSizeChanged"
-          Tapped="Tapped"
+          PointerPressed="Pressed"
+          PointerReleased="Released"
           PointerEntered="PointerEntered"
           PointerExited="PointerExited"
           ui:FrameworkElementExtensions.Cursor="Hand"
@@ -152,6 +153,18 @@
 
 
     <UserControl.Resources>
+        <Storyboard x:Name="DefaultOpacityTappedState">
+            <DoubleAnimation Storyboard.TargetName="EllipseElement"
+                             EnableDependentAnimation="True"
+                             Storyboard.TargetProperty="Opacity"
+                             Duration="0:0:0.4"
+                           
+                             To="0">
+                <DoubleAnimation.EasingFunction>
+                    <PowerEase EasingMode="EaseOut" Power="3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
         <Storyboard x:Name="TappedState">
             <DoubleAnimation Storyboard.TargetName="EllipseElementScale"
                              EnableDependentAnimation="True"
@@ -176,9 +189,9 @@
             <DoubleAnimation Storyboard.TargetName="EllipseElement"
                              EnableDependentAnimation="True"
                              Storyboard.TargetProperty="Opacity"
-                             Duration="0:0:0.5"
+                             Duration="0:0:0.3"
                              From="1"
-                             To="0">
+                             To=".5">
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Name="DefaultState">
