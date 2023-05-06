@@ -17,6 +17,7 @@
     </Page.DataContext>
 
     <Grid>
+    
         <Grid Margin="30,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
@@ -33,5 +34,6 @@
             </Frame>
             <component:Footer Grid.Row="2"/>
         </Grid>
+        <control:ModalWindow/>
     </Grid>
 </Page>

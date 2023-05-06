@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TwinPics.Views.Controls;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,47 @@ namespace TwinPics.Views.Components
         public Footer()
         {
             this.InitializeComponent();
+        }
+        
+
+        private void Button_OnTapped(object sender, DragAndDropEventArgs e)
+        {
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Percent});
+        }
+
+        private void Button_OnTapped_1(object sender, DragAndDropEventArgs e)
+        {
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Small, MinWidth = 200 });
+        }
+
+        private void Button_OnTapped_2(object sender, DragAndDropEventArgs e)
+        {
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium });
+        }
+
+        private void Button_OnTapped_3(object sender, DragAndDropEventArgs e)
+        {
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Large });
+        }
+
+        private void Button_OnTapped_4(object sender, DragAndDropEventArgs e)
+        {
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Width, Width=300 });
+        }
+
+        private void Button_OnTapped_5(object sender, DragAndDropEventArgs e)
+        {
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Percent, WidthPercent=8 });
+        }
+
+        private void Button_OnTapped_6(object sender, DragAndDropEventArgs e)
+        {
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Percent, WidthPercent = 5, MinWidth=300, MaxWidth=600 }) ;
+        }
+
+        private void Button_OnTapped_7(object sender, DragAndDropEventArgs e)
+        {
+
         }
     }
 }

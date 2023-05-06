@@ -132,6 +132,12 @@
     <Compile Include="Views\Controls\Loader.xaml.cs">
       <DependentUpon>Loader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\ModalWindow\ModalWindow.xaml.cs">
+      <DependentUpon>ModalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ModalWindow\ModalWindowController.cs" />
+    <Compile Include="Views\Controls\ModalWindow\ModalWindowProps.cs" />
+    <Compile Include="Views\Controls\ModalWindow\ModalWindowSize.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -180,6 +186,10 @@
     <Page Include="Views\Controls\Loader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ModalWindow\ModalWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>

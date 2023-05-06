@@ -30,26 +30,26 @@
         <StackPanel Orientation="Horizontal" 
                     Spacing="1"
                     VerticalAlignment="Center">
-            <control:Button Text="About" Style="{StaticResource FooterButton}"/>
+            <control:Button Text="About" Style="{StaticResource FooterButton}" OnTapped="Button_OnTapped"/>
             <Ellipse/>
-            <control:Button Text="FAQ" Style="{StaticResource FooterButton}"/>
+            <control:Button Text="FAQ" Style="{StaticResource FooterButton}" OnTapped="Button_OnTapped_1"/>
             <Ellipse/>
-            <control:Button Text="Settings" Style="{StaticResource FooterButton}"/>
+            <control:Button Text="Settings" Style="{StaticResource FooterButton}" OnTapped="Button_OnTapped_2"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" 
                     Spacing="1"
                     VerticalAlignment="Center"
                     Grid.Column="2">
-            <control:Button Text="Email" Style="{StaticResource FooterButton}"/>
+            <control:Button Text="Email" Style="{StaticResource FooterButton}" OnTapped="Button_OnTapped_3"/>
             <Ellipse/>
-            <control:Button Text="Donate" Style="{StaticResource FooterButton}"/>
+            <control:Button Text="Donate" Style="{StaticResource FooterButton}" OnTapped="Button_OnTapped_4"/>
             <Ellipse/>
-            <control:Button Text="Dribbble" Style="{StaticResource FooterButton}"/>
+            <control:Button Text="Dribbble" Style="{StaticResource FooterButton}" OnTapped="Button_OnTapped_5"/>
             <Ellipse/>
-            <control:Button Text="LinkedIn" Style="{StaticResource FooterButton}"/>
+            <control:Button Text="LinkedIn" Style="{StaticResource FooterButton}" OnTapped="Button_OnTapped_6"/>
             <Ellipse/>
-            <control:Button Text="GitHub" Style="{StaticResource FooterButton}"/>
+            <control:Button Text="GitHub" Style="{StaticResource FooterButton}" OnTapped="Button_OnTapped_7"/>
         </StackPanel>
     </Grid>
 </Page>

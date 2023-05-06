@@ -32,7 +32,9 @@ namespace TwinPics.Controllers
         public static void CallThemeChanged(object value, EventArgs e)
         {
             if (OnThemeChanged != null)
+            {
                 OnThemeChanged(value, e);
+            }
         }
     }
 }
