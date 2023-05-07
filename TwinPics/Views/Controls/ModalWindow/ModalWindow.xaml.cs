@@ -7,6 +7,13 @@ namespace TwinPics.Views.Controls
 {
     public sealed partial class ModalWindow : UserControl
     {
+
+        public static double INDENT = 35.0;
+
+        public readonly Thickness INDENT_THICKNESS_TOP = new Thickness(0, INDENT, 0, 0);
+
+        public readonly Thickness INDENT_THICKNESS_BOTTOM = new Thickness(0, 0, 0, INDENT);
+
         public ModalWindow()
         {
             this.InitializeComponent();
@@ -22,7 +29,7 @@ namespace TwinPics.Views.Controls
                 ColumnDefinition getSideTemplate() => new ColumnDefinition()
                 {
                     Width = new GridLength(1, GridUnitType.Star),
-                    MinWidth = 50
+                    MinWidth = INDENT
                 };
 
                 var modalTemplate = new ColumnDefinition();
@@ -63,6 +70,12 @@ namespace TwinPics.Views.Controls
             }
         }
 
+        private void ResetStates()
+        {
+            ContetntScrollViewer.ScrollToVerticalOffset(0);
+            ContetntScrollViewer.Margin = new Thickness(0, 0, 0, 0);
+        }
+
         private void OpenModalWindow(object sender, EventArgs e)
         {
             if (sender is ModalWindowProps props)
@@ -76,11 +89,26 @@ namespace TwinPics.Views.Controls
         private void CloseModalWindow(object sender, EventArgs e)
         {
             MainContainer.Visibility = Visibility.Collapsed;
+            ResetStates();
         }
 
         private void BackstagePointerReleased(object sender, PointerRoutedEventArgs e)
         {
             ModalWindowController.CallCloseModalWindow();
+        }
+
+        private void ScrollChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (sender is ScrollViewer scroll)
+            {
+                var offset = (scroll.VerticalOffset - scroll.ScrollableHeight) * -1;
+
+                double getOffsetHeight() => offset <= INDENT ? INDENT - offset : 0;
+
+                /* FocusVisualSecondaryThickness is responsible for Margin in VerticalScrollBar */
+                scroll.FocusVisualSecondaryThickness = new Thickness(0, 0, 0, getOffsetHeight());
+                BottomClickableSpace.Height = getOffsetHeight();
+            }
         }
     }
 }

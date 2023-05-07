@@ -9,20 +9,32 @@
     d:DesignWidth="400">
 
     <Grid x:Name="MainContainer" Visibility="Collapsed">
-     
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <Grid  x:Name="GridContainer">
+        <Grid x:Name="Backstage" Background="#60000000" PointerReleased="BackstagePointerReleased"/>
+        <Grid x:Name="GridContainer">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" Grid.Column="1" Margin="{x:Bind INDENT_THICKNESS_TOP}" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-               
-                <Grid Grid.Row="1" Margin="0,50,0,50" Grid.Column="1" Height="500" Background="red">
+                <!-- Header -->
+                <Grid Height="50" Background="#f0f0f0" CornerRadius="9,9,0,0"/>
 
-                </Grid>
+                <ScrollViewer  x:Name="ContetntScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" ViewChanged="ScrollChanged">
+                    <!-- Contetnt -->
+                    <Grid Height="500" Margin="{x:Bind INDENT_THICKNESS_BOTTOM}" VerticalAlignment="Top" Background="White" CornerRadius="0,0,9,9"/>
+                </ScrollViewer>
             </Grid>
-        </ScrollViewer>
-        <Grid x:Name="Backstage" Background="#60000000" PointerReleased="BackstagePointerReleased"/>
+
+            <Grid x:Name="BottomClickableSpace" Grid.Row="1" Grid.Column="1" Background="#01000000" VerticalAlignment="Bottom" PointerReleased="BackstagePointerReleased"/>
+        </Grid>
+
+        
+
     </Grid>
 </UserControl>
