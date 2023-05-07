@@ -30,17 +30,21 @@
                 <Grid Grid.RowSpan="2" Background="White" CornerRadius="9" Margin="{x:Bind INDENT_THICKNESS_BOTTOM}"/>
 
                 <!-- Header -->
-                <Grid x:Name="HeaderContainer" Height="50" BorderThickness=".5,.5,.5,0" BorderBrush="DarkGray" CornerRadius="9,9,0,0">
-                    <Grid x:Name="HeaderContent">
-                        <local:Button x:Name="CloseButton" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,0" Width="30" Height="30" Background="#F6F6F6" HoveredBackground="#E6E6E6" 
+                <Grid x:Name="HeaderContainer">
+                    <Grid x:Name="HeaderContent" Padding="15,0,15,0">
+                        <StackPanel x:Name="TitlesStackPanel" VerticalAlignment="Bottom" Spacing="-2" Padding="0,0,45,0">
+                            <TextBlock x:Name="TitleTextBlock" TextTrimming="CharacterEllipsis" FontWeight="Medium" Foreground="Black" FontSize="19"/>
+                            <TextBlock x:Name="SubitleTextBlock" TextTrimming="CharacterEllipsis" Foreground="Black" FontSize="14" Opacity=".6"/>
+                        </StackPanel>
+                        <local:Button x:Name="CloseButton" VerticalAlignment="Center" HorizontalAlignment="Right" Width="30" Height="30" Background="#F3F3F3" HoveredBackground="#E6E6E6" 
                                   CornerRadius="100" Icon="ms-appx:///Assets/CloseIcon50x50.png" IconSize="12" IconColor="#404040" HoveredIconColor="Black" OnTapped="ButtonCloseClick"/>
                     </Grid>
                 </Grid>
-                
+
                 <ScrollViewer x:Name="ContetntScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" ViewChanged="ScrollChanged">
                     <StackPanel>
                         <!-- Contetnt -->
-                        <Grid x:Name="ContetntContainer" BorderThickness=".5,0,.5,.5" BorderBrush="DarkGray" VerticalAlignment="Top" CornerRadius="0,0,9,9" Padding="10"/>
+                        <Grid x:Name="ContetntContainer" Height="500" VerticalAlignment="Top"  Padding="10"/>
                         
                         <!-- Bottom clickable space -->
                         <Grid Background="#01000000" Height="{x:Bind INDENT_HEIGHT}" PointerReleased="BackstageCloseClick"/>

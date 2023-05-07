@@ -31,22 +31,22 @@ namespace TwinPics.Views.Components
 
         private void Button_OnTapped(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Percent});
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, Title = "Hello world", Subtitle = "This text and bla bla bla bla bla" });
         }
 
         private void Button_OnTapped_1(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Small, MinWidth = 200 });
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, Title = "Hello world" });
         }
 
         private void Button_OnTapped_2(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, IsVisibleHeader = false });
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, Subtitle = "This text and bla bla bla bla bla" });
         }
 
         private void Button_OnTapped_3(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Large });
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, IsVisibleHeader = false });
         }
 
         private void Button_OnTapped_4(object sender, DragAndDropEventArgs e)

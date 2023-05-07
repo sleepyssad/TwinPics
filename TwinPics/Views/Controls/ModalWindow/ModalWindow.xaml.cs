@@ -97,6 +97,13 @@ namespace TwinPics.Views.Controls
                 {
                     HeaderContainer.Height = 50;
                     HeaderContent.Visibility = Visibility.Visible;
+
+                    TitleTextBlock.Visibility = !string.IsNullOrEmpty(props.Title) ? Visibility.Visible : Visibility.Collapsed;
+                    TitleTextBlock.Text = props.Title ?? "";
+                    SubitleTextBlock.Visibility = !string.IsNullOrEmpty(props.Subtitle) ? Visibility.Visible : Visibility.Collapsed;
+                    SubitleTextBlock.Text = props.Subtitle ?? "";
+
+                    TitlesStackPanel.VerticalAlignment = !string.IsNullOrEmpty(props.Title) && !string.IsNullOrEmpty(props.Subtitle) ? VerticalAlignment.Bottom : VerticalAlignment.Center;
                 }
 
             }
