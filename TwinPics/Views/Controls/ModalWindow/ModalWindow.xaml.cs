@@ -2,6 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
+using System.Threading.Tasks;
 
 namespace TwinPics.Views.Controls
 {
@@ -14,12 +15,25 @@ namespace TwinPics.Views.Controls
 
         public readonly Thickness INDENT_THICKNESS_BOTTOM = new Thickness(0, 0, 0, INDENT);
 
+        public readonly double INDENT_HEIGHT = INDENT;
+
+        private bool _canClose = false;
+
         public ModalWindow()
         {
             this.InitializeComponent();
 
             ModalWindowController.OnOpenModalWindow += OpenModalWindow;
             ModalWindowController.OnCloseModalWindow += CloseModalWindow;
+        }
+
+        private async Task StartCanCloseTimer()
+        {
+            if (!_canClose)
+            {
+                await Task.Delay(50);
+                _canClose = true;
+            }
         }
 
         private void SetProps(ModalWindowProps props)
@@ -57,16 +71,34 @@ namespace TwinPics.Views.Controls
                 }
 
                 if (props.MinWidth != default)
+                {
                     modalTemplate.MinWidth = props.MinWidth;
+                }
 
                 if (props.MaxWidth != default)
+                {
                     modalTemplate.MaxWidth = props.MaxWidth;
-
+                }
 
                 GridContainer.ColumnDefinitions.Clear();
                 GridContainer.ColumnDefinitions.Add(getSideTemplate());
                 GridContainer.ColumnDefinitions.Add(modalTemplate);
                 GridContainer.ColumnDefinitions.Add(getSideTemplate());
+            }
+
+            /* Init header */
+            {
+                if (props.IsVisibleHeader == false)
+                {
+                    HeaderContainer.Height = HeaderContainer.CornerRadius.TopLeft;
+                    HeaderContent.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    HeaderContainer.Height = 50;
+                    HeaderContent.Visibility = Visibility.Visible;
+                }
+
             }
         }
 
@@ -83,16 +115,36 @@ namespace TwinPics.Views.Controls
                 SetProps(props);
 
                 MainContainer.Visibility = Visibility.Visible;
+
+                OpenState.Begin();
+                OpenState.Completed += (object sender, object e) => 
+                {
+                    /* Buffer time to allow close modal window */
+                    StartCanCloseTimer();
+                };
             }
         }
 
         private void CloseModalWindow(object sender, EventArgs e)
         {
-            MainContainer.Visibility = Visibility.Collapsed;
-            ResetStates();
+            _canClose = false;
+            ClosedState.Begin();
+            ClosedState.Completed += (object sender, object e) =>
+            {
+                MainContainer.Visibility = Visibility.Collapsed;
+                ResetStates();
+            };
         }
 
-        private void BackstagePointerReleased(object sender, PointerRoutedEventArgs e)
+        private void BackstageCloseClick(object sender, PointerRoutedEventArgs e)
+        {
+            if (_canClose)
+            {
+                ModalWindowController.CallCloseModalWindow();
+            }
+        }
+
+        private void ButtonCloseClick(object sender, DragAndDropEventArgs e)
         {
             ModalWindowController.CallCloseModalWindow();
         }
@@ -103,11 +155,8 @@ namespace TwinPics.Views.Controls
             {
                 var offset = (scroll.VerticalOffset - scroll.ScrollableHeight) * -1;
 
-                double getOffsetHeight() => offset <= INDENT ? INDENT - offset : 0;
-
                 /* FocusVisualSecondaryThickness is responsible for Margin in VerticalScrollBar */
-                scroll.FocusVisualSecondaryThickness = new Thickness(0, 0, 0, getOffsetHeight());
-                BottomClickableSpace.Height = getOffsetHeight();
+                scroll.FocusVisualSecondaryThickness = new Thickness(0, 0, 0, offset <= INDENT ? INDENT - offset : 0);
             }
         }
     }

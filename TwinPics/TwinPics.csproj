@@ -160,6 +160,7 @@
     <Content Include="Assets\AddFolder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\CloseIcon50x50.png" />
     <Content Include="Assets\Logo200x200.png" />
     <Content Include="Assets\SplashScreen.png" />
     <Content Include="Properties\Default.rd.xml" />

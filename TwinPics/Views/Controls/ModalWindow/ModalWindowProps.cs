@@ -15,7 +15,7 @@ namespace TwinPics.Views.Controls
 
         public string Title { get; set; }
 
-        public bool IsVisibleTitleBar { get; set; } = true;
+        public bool IsVisibleHeader { get; set; } = true;
 
         public ModalWindowSize Size { get; set; } = ModalWindowSize.Adaptive;
 

@@ -41,7 +41,7 @@ namespace TwinPics.Views.Components
 
         private void Button_OnTapped_2(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium });
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, IsVisibleHeader = false });
         }
 
         private void Button_OnTapped_3(object sender, DragAndDropEventArgs e)
