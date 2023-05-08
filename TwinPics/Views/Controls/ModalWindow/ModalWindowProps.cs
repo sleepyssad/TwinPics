@@ -11,7 +11,7 @@ namespace TwinPics.Views.Controls
 
     public class ModalWindowProps
     {
-        public Page Page { get; set; }
+        public object Content { get; set; }
 
         public string Title { get; set; }
 
@@ -19,7 +19,7 @@ namespace TwinPics.Views.Controls
 
         public bool IsVisibleHeader { get; set; } = true;
 
-        public ModalWindowSize Size { get; set; } = ModalWindowSize.Adaptive;
+        public ModalWindowSize Size { get; set; } = ModalWindowSize.Auto;
 
         public double WidthPercent { get; set; }
 

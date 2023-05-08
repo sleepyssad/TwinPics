@@ -38,7 +38,7 @@ namespace TwinPics.Views.Controls
 
         private void SetProps(ModalWindowProps props)
         {
-            /* Init grid columns */
+            // Init grid columns
             {
                 ColumnDefinition getSideTemplate() => new ColumnDefinition()
                 {
@@ -50,7 +50,7 @@ namespace TwinPics.Views.Controls
 
                 switch (props.Size)
                 {
-                    case ModalWindowSize.Adaptive:
+                    case ModalWindowSize.Auto:
                         modalTemplate = new ColumnDefinition { Width = new GridLength(0, GridUnitType.Auto) };
                         break;
                     case ModalWindowSize.Small:
@@ -86,11 +86,11 @@ namespace TwinPics.Views.Controls
                 GridContainer.ColumnDefinitions.Add(getSideTemplate());
             }
 
-            /* Init header */
+            // Init header 
             {
                 if (props.IsVisibleHeader == false)
                 {
-                    HeaderContainer.Height = HeaderContainer.CornerRadius.TopLeft;
+                    HeaderContainer.Height = HeaderContent.CornerRadius.TopLeft;
                     HeaderContent.Visibility = Visibility.Collapsed;
                 }
                 else
@@ -105,14 +105,27 @@ namespace TwinPics.Views.Controls
 
                     TitlesStackPanel.VerticalAlignment = !string.IsNullOrEmpty(props.Title) && !string.IsNullOrEmpty(props.Subtitle) ? VerticalAlignment.Bottom : VerticalAlignment.Center;
                 }
+            }
 
+            // Load content 
+            {
+                try
+                {
+                    ContentControlContainer.Content = props.Content;
+                }
+                catch (Exception ex)
+                {
+                    ErrorContentText.Visibility = Visibility.Visible;
+                    ErrorContentText.Text = $"Exception load content: {ex.Message}";
+                }
             }
         }
 
         private void ResetStates()
         {
             ContetntScrollViewer.ScrollToVerticalOffset(0);
-            ContetntScrollViewer.Margin = new Thickness(0, 0, 0, 0);
+            ContentControlContainer.Content = null;
+            ErrorContentText.Visibility = Visibility.Collapsed;
         }
 
         private void OpenModalWindow(object sender, EventArgs e)
@@ -126,7 +139,7 @@ namespace TwinPics.Views.Controls
                 OpenState.Begin();
                 OpenState.Completed += (object sender, object e) => 
                 {
-                    /* Buffer time to allow close modal window */
+                    // Buffer time to allow close modal window
                     StartCanCloseTimer();
                 };
             }
@@ -156,14 +169,20 @@ namespace TwinPics.Views.Controls
             ModalWindowController.CallCloseModalWindow();
         }
 
-        private void ScrollChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private void ScrollChanged(object sender, dynamic e)
         {
             if (sender is ScrollViewer scroll)
             {
                 var offset = (scroll.VerticalOffset - scroll.ScrollableHeight) * -1;
 
-                /* FocusVisualSecondaryThickness is responsible for Margin in VerticalScrollBar */
+                // FocusVisualSecondaryThickness is responsible for Margin in VerticalScrollBar 
                 scroll.FocusVisualSecondaryThickness = new Thickness(0, 0, 0, offset <= INDENT ? INDENT - offset : 0);
+
+                // Reset Vertical Offset if scroll is missing
+                //if (scroll.ComputedVerticalScrollBarVisibility == Visibility.Collapsed)
+                //{
+                //    scroll.ScrollToVerticalOffset(0);
+                //}
             }
         }
     }

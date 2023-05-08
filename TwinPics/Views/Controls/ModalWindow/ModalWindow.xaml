@@ -41,10 +41,13 @@
                     </Grid>
                 </Grid>
 
-                <ScrollViewer x:Name="ContetntScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" ViewChanged="ScrollChanged">
+                <ScrollViewer x:Name="ContetntScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" ViewChanged="ScrollChanged" SizeChanged="ScrollChanged">
                     <StackPanel>
                         <!-- Contetnt -->
-                        <Grid x:Name="ContetntContainer" Background="White" Height="500" CornerRadius="0,0,9,9"  VerticalAlignment="Top"  Padding="10"/>
+                        <Grid x:Name="ContetntGridContainer" Background="White" CornerRadius="0,0,9,9"  VerticalAlignment="Top"  Padding="10">
+                            <TextBlock x:Name="ErrorContentText" Foreground="red" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed"/>
+                            <ContentControl x:Name="ContentControlContainer"/>
+                        </Grid>
                         
                         <!-- Bottom clickable space -->
                         <Grid Background="Black" Opacity="0" Height="{x:Bind INDENT_HEIGHT}" PointerReleased="BackstageCloseClick"/>

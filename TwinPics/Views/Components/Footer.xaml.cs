@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TwinPics.Views.Controls;
+using TwinPics.Views.Pages;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -31,12 +32,12 @@ namespace TwinPics.Views.Components
 
         private void Button_OnTapped(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, Title = "Hello world", Subtitle = "This text and bla bla bla bla bla" });
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Auto, Title = "Hello world", Subtitle = "This text and bla bla bla bla bla", Content = new PrimaryPage(), });
         }
 
         private void Button_OnTapped_1(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, Title = "Hello world" });
+            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, Title = "Hello world", Content=this });
         }
 
         private void Button_OnTapped_2(object sender, DragAndDropEventArgs e)

@@ -8,7 +8,7 @@ namespace TwinPics.Views.Controls
 {
     public enum ModalWindowSize
     {
-        Adaptive,
+        Auto,
         Small,
         Medium,
         Large,
