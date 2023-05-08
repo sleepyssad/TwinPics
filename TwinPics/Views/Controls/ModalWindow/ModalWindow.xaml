@@ -31,7 +31,7 @@
 
                 <!-- Header -->
                 <Grid x:Name="HeaderContainer">
-                    <Grid x:Name="HeaderContent" Padding="15,0,15,0">
+                    <Grid x:Name="HeaderContent" Background="White"  CornerRadius="9,9,0,0" Padding="15,0,15,0">
                         <StackPanel x:Name="TitlesStackPanel" VerticalAlignment="Bottom" Spacing="-2" Padding="0,0,45,0">
                             <TextBlock x:Name="TitleTextBlock" TextTrimming="CharacterEllipsis" FontWeight="Medium" Foreground="Black" FontSize="19"/>
                             <TextBlock x:Name="SubitleTextBlock" TextTrimming="CharacterEllipsis" Foreground="Black" FontSize="14" Opacity=".6"/>
@@ -44,10 +44,10 @@
                 <ScrollViewer x:Name="ContetntScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" ViewChanged="ScrollChanged">
                     <StackPanel>
                         <!-- Contetnt -->
-                        <Grid x:Name="ContetntContainer" Height="500" VerticalAlignment="Top"  Padding="10"/>
+                        <Grid x:Name="ContetntContainer" Background="White" Height="500" CornerRadius="0,0,9,9"  VerticalAlignment="Top"  Padding="10"/>
                         
                         <!-- Bottom clickable space -->
-                        <Grid Background="#01000000" Height="{x:Bind INDENT_HEIGHT}" PointerReleased="BackstageCloseClick"/>
+                        <Grid Background="Black" Opacity="0" Height="{x:Bind INDENT_HEIGHT}" PointerReleased="BackstageCloseClick"/>
                     </StackPanel>
                 </ScrollViewer>
                 
