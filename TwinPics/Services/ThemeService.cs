@@ -13,7 +13,7 @@ namespace TwinPics.Services
 
         public void Change()
         {
-            Changed.Invoke(null, EventArgs.Empty);
+            Changed?.Invoke(null, EventArgs.Empty);
         }
     }
 }

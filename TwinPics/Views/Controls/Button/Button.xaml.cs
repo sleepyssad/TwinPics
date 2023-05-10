@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Uwp.Helpers;
 using System;
+using System.Security.Cryptography;
 using System.Windows.Input;
 using System.Xml.Linq;
 using TwinPics.Controllers;
@@ -108,9 +109,14 @@ namespace TwinPics.Views.Controls
             set { SetValue(CommandParameterProperty, value); }
         }
 
+        private string _id;
+
+        private static ButtonTargert _target;
 
         public Button()
         {
+            _id = Guid.NewGuid().ToString("N");
+
             InitializeComponent();
 
             AppController.instance.Theme.Changed += OnThemeChanged;
@@ -163,19 +169,27 @@ namespace TwinPics.Views.Controls
 
                 EllipseElement.Width = EllipseElement.Height = this.ActualWidth / 5;
                 EllipseElement.Margin = new Thickness(position.X - (EllipseElement.Width / 2), position.Y - (EllipseElement.Height / 2), 0, 0);
+
                 TappedState.Begin();
+
+                SetTarget();
             }
         }
 
         private void Released(object sender, PointerRoutedEventArgs e)
         {
-            DefaultOpacityTappedState.Begin();
-
-            Click?.Invoke(this, EventArgs.Empty);
-
-            if (Command != null && Command.CanExecute(CommandParameter))
+            if (_target.IdTargert == _id)
             {
-                Command.Execute(CommandParameter);
+                DefaultOpacityTappedState.Begin();
+
+                Click?.Invoke(this, EventArgs.Empty);
+
+                SetTarget();
+
+                if (Command != null && Command.CanExecute(CommandParameter))
+                {
+                    Command.Execute(CommandParameter);
+                }
             }
         }
 
@@ -185,7 +199,7 @@ namespace TwinPics.Views.Controls
             try
             {
                 HoverState.Begin();
-            
+
             }
             catch
             {
@@ -217,6 +231,14 @@ namespace TwinPics.Views.Controls
             {
                 grid.Clip.Rect = new Rect(0, 0, grid.ActualWidth, grid.ActualHeight);
             }
+        }
+
+        private void SetTarget()
+        {
+            _target = new ButtonTargert
+            {
+                IdTargert = _id,
+            };
         }
     }
 }

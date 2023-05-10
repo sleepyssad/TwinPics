@@ -132,6 +132,7 @@
     <Compile Include="Views\Controls\Button\Button.xaml.cs">
       <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\Button\ButtonTargert.cs" />
     <Compile Include="Views\Controls\Loader.xaml.cs">
       <DependentUpon>Loader.xaml</DependentUpon>
     </Compile>
