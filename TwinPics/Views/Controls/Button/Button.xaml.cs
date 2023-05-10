@@ -15,11 +15,7 @@ namespace TwinPics.Views.Controls
 {
     public sealed partial class Button : UserControl
     {
-        public event EventHandler<DragAndDropEventArgs> OnTapped;
-
-        public event EventHandler<DragAndDropEventArgs> OnPointerEntered;
-
-        public event EventHandler<DragAndDropEventArgs> OnPointerExited;
+        public event EventHandler Click;
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(Button), new PropertyMetadata(null));
         public string Text
@@ -112,6 +108,7 @@ namespace TwinPics.Views.Controls
             set { SetValue(CommandParameterProperty, value); }
         }
 
+
         public Button()
         {
             InitializeComponent();
@@ -174,10 +171,7 @@ namespace TwinPics.Views.Controls
         {
             DefaultOpacityTappedState.Begin();
 
-            if (OnTapped != null)
-            {
-                OnTapped(this, null);
-            }
+            Click?.Invoke(this, EventArgs.Empty);
 
             if (Command != null && Command.CanExecute(CommandParameter))
             {
@@ -197,11 +191,6 @@ namespace TwinPics.Views.Controls
             {
 
             }
-
-            if (OnPointerEntered != null) 
-            {
-                OnPointerEntered(this, null);
-            }
         }
 
         private void PointerExited(object sender, PointerRoutedEventArgs e)
@@ -214,11 +203,6 @@ namespace TwinPics.Views.Controls
             catch
             {
 
-            }
-
-            if (OnPointerExited != null)
-            {
-                OnPointerExited(this, null);
             }
         }
 

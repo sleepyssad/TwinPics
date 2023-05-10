@@ -129,7 +129,7 @@
     <Compile Include="Views\Components\Footer.xaml.cs">
       <DependentUpon>Footer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\Button.xaml.cs">
+    <Compile Include="Views\Controls\Button\Button.xaml.cs">
       <DependentUpon>Button.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\Loader.xaml.cs">
@@ -183,7 +183,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\Button.xaml">
+    <Page Include="Views\Controls\Button\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
