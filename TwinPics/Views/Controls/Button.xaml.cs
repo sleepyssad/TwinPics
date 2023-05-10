@@ -191,6 +191,7 @@ namespace TwinPics.Views.Controls
             try
             {
                 HoverState.Begin();
+            
             }
             catch
             {
@@ -208,6 +209,7 @@ namespace TwinPics.Views.Controls
             try
             {
                 DefaultState.Begin();
+                DefaultOpacityTappedState.Begin();
             }
             catch
             {
