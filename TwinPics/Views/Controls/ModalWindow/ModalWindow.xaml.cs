@@ -4,6 +4,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using System.Threading.Tasks;
 using System.Dynamic;
+using TwinPics.Controllers;
 
 namespace TwinPics.Views.Controls
 {
@@ -24,8 +25,8 @@ namespace TwinPics.Views.Controls
         {
             this.InitializeComponent();
 
-            ModalWindowController.OnOpenModalWindow += OpenModalWindow;
-            ModalWindowController.OnCloseModalWindow += CloseModalWindow;
+            AppController.instance.ModalWindow.Opened += OpenModalWindow;
+            AppController.instance.ModalWindow.Closed += CloseModalWindow;
         }
 
         private async Task StartCanCloseTimer()
@@ -161,7 +162,7 @@ namespace TwinPics.Views.Controls
         {
             if (_canClose)
             {
-                ModalWindowController.CallCloseModalWindow();
+                AppController.instance.ModalWindow.Close();
             }
         }
 

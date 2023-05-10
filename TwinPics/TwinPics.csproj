@@ -120,8 +120,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Contracts\Services\IModalWindowService.cs" />
+    <Compile Include="Contracts\Services\IThemeService.cs" />
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Converters\SolidColorBrushToColor.cs" />
+    <Compile Include="Services\ThemeService.cs" />
     <Compile Include="ViewModels\TestViewModel.cs" />
     <Compile Include="Views\Components\Footer.xaml.cs">
       <DependentUpon>Footer.xaml</DependentUpon>
@@ -135,8 +138,8 @@
     <Compile Include="Views\Controls\ModalWindow\ModalWindow.xaml.cs">
       <DependentUpon>ModalWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\ModalWindow\ModalWindowController.cs" />
     <Compile Include="Views\Controls\ModalWindow\ModalWindowProps.cs" />
+    <Compile Include="Views\Controls\ModalWindow\ModalWindowService.cs" />
     <Compile Include="Views\Controls\ModalWindow\ModalWindowSize.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

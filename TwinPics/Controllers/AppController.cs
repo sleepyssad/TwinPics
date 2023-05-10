@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TwinPics.Contracts.Services;
+using TwinPics.Services;
+using TwinPics.Views.Controls;
 
 namespace TwinPics.Controllers
 {
-    public class AppController
+    internal class AppController
     {
         private static object m_lock = new object();
         private static AppController _instance;
@@ -28,13 +31,15 @@ namespace TwinPics.Controllers
             }
         }
 
-        public static event EventHandler OnThemeChanged;
-        public static void CallThemeChanged(object value, EventArgs e)
+        public IModalWindowService ModalWindow;
+
+        public IThemeService Theme;
+
+        public AppController()
         {
-            if (OnThemeChanged != null)
-            {
-                OnThemeChanged(value, e);
-            }
+            ModalWindow = new ModalWindowService();
+            Theme = new ThemeService();
         }
+
     }
 }

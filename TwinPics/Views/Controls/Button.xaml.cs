@@ -116,7 +116,7 @@ namespace TwinPics.Views.Controls
         {
             InitializeComponent();
 
-            AppController.OnThemeChanged += OnThemeChanged;
+            AppController.instance.Theme.Changed += OnThemeChanged;
         }
 
         private void OnThemeChanged(object sender, EventArgs e)

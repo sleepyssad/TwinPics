@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TwinPics.Controllers;
 using TwinPics.Views.Controls;
 using TwinPics.Views.Pages;
 using Windows.Foundation;
@@ -32,37 +33,37 @@ namespace TwinPics.Views.Components
 
         private void Button_OnTapped(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Auto, Title = "Hello world", Subtitle = "This text and bla bla bla bla bla", Content = new PrimaryPage(), });
+            AppController.instance.ModalWindow.Open(new ModalWindowProps { Size = ModalWindowSize.Auto, Title = "Hello world", Subtitle = "This text and bla bla bla bla bla", Content = new PrimaryPage(), });
         }
 
         private void Button_OnTapped_1(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, Title = "Hello world", Content=this });
+            AppController.instance.ModalWindow.Open(new ModalWindowProps { Size = ModalWindowSize.Medium, Title = "Hello world", Content=this });
         }
 
         private void Button_OnTapped_2(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, Subtitle = "This text and bla bla bla bla bla" });
+            AppController.instance.ModalWindow.Open(new ModalWindowProps { Size = ModalWindowSize.Medium, Subtitle = "This text and bla bla bla bla bla" });
         }
 
         private void Button_OnTapped_3(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Medium, IsVisibleHeader = false });
+            AppController.instance.ModalWindow.Open(new ModalWindowProps { Size = ModalWindowSize.Medium, IsVisibleHeader = false });
         }
 
         private void Button_OnTapped_4(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Width, Width=300 });
+            AppController.instance.ModalWindow.Open(new ModalWindowProps { Size = ModalWindowSize.Width, Width=300 });
         }
 
         private void Button_OnTapped_5(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Percent, WidthPercent=8 });
+            AppController.instance.ModalWindow.Open(new ModalWindowProps { Size = ModalWindowSize.Percent, WidthPercent=8 });
         }
 
         private void Button_OnTapped_6(object sender, DragAndDropEventArgs e)
         {
-            ModalWindowController.CallOpenModalWindow(new ModalWindowProps { Size = ModalWindowSize.Percent, WidthPercent = 5, MinWidth=300, MaxWidth=600 }) ;
+            AppController.instance.ModalWindow.Open(new ModalWindowProps { Size = ModalWindowSize.Percent, WidthPercent = 5, MinWidth=300, MaxWidth=600 }) ;
         }
 
         private void Button_OnTapped_7(object sender, DragAndDropEventArgs e)

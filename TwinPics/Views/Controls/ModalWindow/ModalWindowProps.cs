@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
 namespace TwinPics.Views.Controls
-{
-
-
+{ 
     public class ModalWindowProps
     {
         public object Content { get; set; }

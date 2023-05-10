@@ -64,7 +64,7 @@ namespace TwinPics
         void App_ThemeChanged(ThemeListener sender)
         {
             ThemeManager.UpdateTheme(sender.CurrentTheme);
-            AppController.CallThemeChanged(sender, null);
+            AppController.instance.Theme.Change();
         }
        
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
