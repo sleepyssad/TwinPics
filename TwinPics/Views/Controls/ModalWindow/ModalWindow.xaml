@@ -11,7 +11,7 @@
 
     <Grid x:Name="MainContainer" Visibility="Collapsed">
         <!-- Main backstage -->
-        <Grid x:Name="Backstage" Background="#60000000" PointerReleased="BackstageCloseClick"/>
+        <Grid x:Name="Backstage" Background="#60000000" PointerReleased="CloseClick"/>
         
         <Grid x:Name="GridContainer">
             <Grid.RowDefinitions>
@@ -37,7 +37,7 @@
                             <TextBlock x:Name="SubitleTextBlock" TextTrimming="CharacterEllipsis" Foreground="Black" FontSize="14" Opacity=".6"/>
                         </StackPanel>
                         <local:Button x:Name="CloseButton" VerticalAlignment="Center" HorizontalAlignment="Right" Width="30" Height="30" Background="#F3F3F3" HoveredBackground="#E6E6E6" 
-                                  CornerRadius="100" Icon="ms-appx:///Assets/CloseIcon50x50.png" IconSize="12" IconColor="#404040" HoveredIconColor="Black" OnTapped="ButtonCloseClick"/>
+                                  CornerRadius="100" Icon="ms-appx:///Assets/CloseIcon50x50.png" IconSize="12" IconColor="#404040" HoveredIconColor="Black" OnTapped="CloseClick"/>
                     </Grid>
                 </Grid>
 
@@ -50,7 +50,7 @@
                         </Grid>
                         
                         <!-- Bottom clickable space -->
-                        <Grid Background="Black" Opacity="0" Height="{x:Bind INDENT_HEIGHT}" PointerReleased="BackstageCloseClick"/>
+                        <Grid Background="Black" Opacity="0" Height="{x:Bind INDENT_HEIGHT}" PointerReleased="CloseClick"/>
                     </StackPanel>
                 </ScrollViewer>
                 

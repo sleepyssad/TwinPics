@@ -3,6 +3,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using System.Threading.Tasks;
+using System.Dynamic;
 
 namespace TwinPics.Views.Controls
 {
@@ -156,17 +157,12 @@ namespace TwinPics.Views.Controls
             };
         }
 
-        private void BackstageCloseClick(object sender, PointerRoutedEventArgs e)
+        private void CloseClick(object sender, dynamic e)
         {
             if (_canClose)
             {
                 ModalWindowController.CallCloseModalWindow();
             }
-        }
-
-        private void ButtonCloseClick(object sender, DragAndDropEventArgs e)
-        {
-            ModalWindowController.CallCloseModalWindow();
         }
 
         private void ScrollChanged(object sender, dynamic e)
