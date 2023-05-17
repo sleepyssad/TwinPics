@@ -5,6 +5,7 @@
     xmlns:local="using:TwinPics.Views.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:TwinPics.ViewModels"
     xmlns:control="using:TwinPics.Views.Controls"
     xmlns:vm="using:TwinPics.ViewModels"
     mc:Ignorable="d">
@@ -14,6 +15,18 @@
     </Page.DataContext>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MinHeight="200"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
         <control:DragAndDrop OnStorageFolder="DragAndDrop_OnStorageFolder" Command="{Binding TestCommand}"/>
+        <ListView Grid.Row="1" ItemsSource="{Binding Files}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:FileData">
+                    <TextBlock Text="{Binding FileName}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
