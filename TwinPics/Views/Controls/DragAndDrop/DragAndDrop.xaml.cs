@@ -110,7 +110,7 @@ namespace TwinPics.Views.Controls
             DefaulStrokeDash.Begin();
         }
 
-        private async void OnRectangleTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private async void OnRectangleClick(object sender, dynamic e)
         {  
             StorageFolder folder = await new FolderPicker().PickSingleFolderAsync();
 

@@ -56,14 +56,16 @@
                        HorizontalAlignment="Center" />
         </StackPanel>
 
-        <Rectangle x:Name="StrokeDash"
+        <local:TargetWrapper Click="OnRectangleClick">
+            <Rectangle x:Name="StrokeDash"
                    Fill="Transparent"
-                   Tapped="OnRectangleTapped"
                    StrokeDashArray="7"
                    ui:FrameworkElementExtensions.Cursor="Hand"
                    Stroke="{ThemeResource StrokeDash}"
                    StrokeThickness="1"
                    RadiusX="10" 
                    RadiusY="10"/>
+        </local:TargetWrapper>
+
     </Grid>
 </UserControl>
