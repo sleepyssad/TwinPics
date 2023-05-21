@@ -25,12 +25,12 @@ namespace TwinPics.Views.Pages
             this.InitializeComponent();
         }
 
-       
         private void FilesSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (sender is ScrollViewer container && container.Content is FrameworkElement content)
+            if (sender is ScrollViewer container)
             {
-                DragAndDropControl.Margin = new Thickness(0, 0, 0, content.ActualHeight >= 40 ? content.ActualHeight + 10 : 0);
+                // 40 is a magic number because on the first and second launch content.ActualHeight is not 0, which is strange because the ListView is empty
+                DragAndDropControl.Margin = new Thickness(0, 0, 0, container.ActualHeight >= 40 ? container.ActualHeight + 10 : 0);
             }
         }
     }
