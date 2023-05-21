@@ -91,14 +91,14 @@ namespace TwinPics.Views.Controls
 
         private async void OnFolderDrop(object sender, DragEventArgs e)
         {
-            if (e.DataView.Contains(StandardDataFormats.StorageItems) && OnStorageFolder != null)
+            if (e.DataView.Contains(StandardDataFormats.StorageItems))
             {
                 var items = await e.DataView.GetStorageItemsAsync();
                 if (items.Count > 0)
                 {
                     var DropEventArgs = new DragAndDropEventArgs(items.OfType<StorageFolder>().ToList());
 
-                    OnStorageFolder(this, DropEventArgs);
+                    OnStorageFolder?.Invoke(this, DropEventArgs);
 
                     if (Command.CanExecute(DropEventArgs))
                     {
@@ -114,11 +114,12 @@ namespace TwinPics.Views.Controls
         {  
             StorageFolder folder = await new FolderPicker().PickSingleFolderAsync();
 
-            if (folder != null && OnStorageFolder != null)
+            if (folder != null)
             {
                 var DropEventArgs = new DragAndDropEventArgs(new List<StorageFolder> { folder });
 
-                OnStorageFolder(this, DropEventArgs);
+                
+                OnStorageFolder?.Invoke(this, DropEventArgs);
 
                 if (Command.CanExecute(DropEventArgs))
                 {
