@@ -17,7 +17,7 @@
         <Setter Property="HoveredBackground" Value="Transparent"/>
     </Style>
 
-    <Style TargetType="ScrollViewer">
+    <Style x:Key="ScrollViewerFix" TargetType="ScrollViewer">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ScrollViewer">

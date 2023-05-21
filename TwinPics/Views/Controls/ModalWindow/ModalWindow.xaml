@@ -41,7 +41,7 @@
                     </Grid>
                 </Grid>
 
-                <ScrollViewer x:Name="ContetntScrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" ViewChanged="ScrollChanged" SizeChanged="ScrollChanged">
+                <ScrollViewer x:Name="ContetntScrollViewer" Style="{StaticResource ScrollViewerFix}" Grid.Row="1" VerticalScrollBarVisibility="Auto" ViewChanged="ScrollChanged" SizeChanged="ScrollChanged">
                     <StackPanel>
                         <!-- Contetnt -->
                         <Grid x:Name="ContetntGridContainer" Background="White" CornerRadius="0,0,9,9"  VerticalAlignment="Top"  Padding="10">
