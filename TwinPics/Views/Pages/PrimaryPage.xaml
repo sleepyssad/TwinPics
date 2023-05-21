@@ -15,18 +15,15 @@
     </Page.DataContext>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" MinHeight="200"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        
-        <control:DragAndDrop OnStorageFolder="DragAndDrop_OnStorageFolder" Command="{Binding TestCommand}"/>
-        <ListView Grid.Row="1" ItemsSource="{Binding Files}">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="model:FileData">
-                    <TextBlock Text="{Binding FileName}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <control:DragAndDrop x:Name="DragAndDropControl" Command="{Binding TestCommand}"/>
+        <ScrollViewer Margin="0,200,0,0" VerticalAlignment="Bottom" HorizontalScrollBarVisibility="Disabled" SizeChanged="FilesSizeChanged">
+            <ListView ItemsSource="{Binding Files}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:FileData">
+                        <TextBlock Text="{Binding FileName}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollViewer>
     </Grid>
 </Page>

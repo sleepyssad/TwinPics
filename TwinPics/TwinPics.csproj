@@ -142,6 +142,7 @@
     <Compile Include="Views\Controls\ModalWindow\ModalWindowProps.cs" />
     <Compile Include="Views\Controls\ModalWindow\ModalWindowService.cs" />
     <Compile Include="Views\Controls\ModalWindow\ModalWindowSize.cs" />
+    <Compile Include="Views\Controls\TargetWrapper.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

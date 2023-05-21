@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TwinPics.Views.Controls;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -11,15 +12,12 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-
-// Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace TwinPics.Views.Pages
 {
-    /// <summary>
-    /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
-    /// </summary>
+   
     public sealed partial class PrimaryPage : Page
     {
         public PrimaryPage()
@@ -27,9 +25,13 @@ namespace TwinPics.Views.Pages
             this.InitializeComponent();
         }
 
-        private void DragAndDrop_OnStorageFolder(object sender, Controls.DragAndDropEventArgs e)
+       
+        private void FilesSizeChanged(object sender, SizeChangedEventArgs e)
         {
-
+            if (sender is ScrollViewer container && container.Content is FrameworkElement content)
+            {
+                DragAndDropControl.Margin = new Thickness(0, 0, 0, content.ActualHeight >= 40 ? content.ActualHeight + 10 : 0);
+            }
         }
     }
 }

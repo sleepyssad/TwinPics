@@ -12,13 +12,16 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TwinPics.Views.Controls;
 using System.Collections.ObjectModel;
+using System.Threading;
+using Microsoft.Toolkit.Uwp.Helpers;
 
 namespace TwinPics.ViewModels
 {
 
-    public class FileData
+    public partial class FileData : ObservableObject
     {
-        public string FileName { get; set; }
+        [ObservableProperty]
+        private int fileName;
     }
 
     public partial class TestViewModel : ObservableObject
@@ -38,9 +41,32 @@ namespace TwinPics.ViewModels
 
             TestCommand = new RelayCommand<DragAndDropEventArgs>(Test);
         }
-        public void Test(DragAndDropEventArgs dropEventArgs)
+
+       
+
+        private async Task TaskAsync()
         {
-            Files.Add(new FileData { FileName = "1" });
+            Files.Add(new FileData { FileName = 1 });
+            int index = Files.Count - 1;
+
+            while (Files[index].FileName < 1000)
+            {
+                await Task.Delay(250);
+
+                // Используем метод RunAsync для выполнения кода в основном потоке UI
+                await DispatcherHelper.ExecuteOnUIThreadAsync(() =>
+                {
+                    Files[index].FileName++;
+                });
+            }
+        }
+        private CancellationTokenSource cancellationTokenSource;
+        public async void Test(DragAndDropEventArgs dropEventArgs)
+        {
+           
+            cancellationTokenSource = new CancellationTokenSource();
+            await TaskAsync();
+
         }
     }
 }
